@@ -1,4 +1,4 @@
-Largest product in a series
+﻿Largest product in a series
 ===========================
 
 Find the greatest product of five consecutive digits in the 1000-digit number.
