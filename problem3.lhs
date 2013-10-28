@@ -7,6 +7,9 @@ What is the largest prime factor of the number 600851475143?
 
 ---
 
+> module Problem3 where
+> import Problem1 (divBy)
+
 > main :: IO ()
 > main = print . maximum . factor $ 600851475143
 
@@ -29,4 +32,4 @@ What is the largest prime factor of the number 600851475143?
 > isPrime n = all (not . divBy n) [2 .. n - 1]
 
 > divBy :: Integral a => a -> a -> Bool
-> divBy n m = rem n m == 0
+> divBy n d = rem n d == 0

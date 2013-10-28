@@ -8,6 +8,8 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 ---
 
+> module problem1 where
+
 > main :: IO ()
 > main = print . sum . filter divBy3or5 $ [1 .. 999]
 >   where
@@ -15,4 +17,4 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 >     divBy3or5 n = n `divBy` 3 || n `divBy` 5
 
 > divBy :: Integral a => a -> a -> Bool
-> divBy n m = rem n m == 0
+> divBy n d = rem n d == 0
