@@ -25,11 +25,11 @@ What is the largest prime factor of the number 600851475143?
 My initial solution used the Sieve of Eratosthenes to calculate the prime numbers,
 as can be seen below.
 
-< primes :: Integral a => [a]
-< primes = sieve [2..]
-<   where
-<     sieve :: Integral a => [a] -> [a]
-<     sieve (x:xs) = x : sieve (filter (\y -> not (y `divBy` x)) xs)
+    primes :: Integral a => [a]
+    primes = sieve [2..]
+      where
+        sieve :: Integral a => [a] -> [a]
+        sieve (x:xs) = x : sieve (filter (\y -> not (y `divBy` x)) xs)
 
 Upon reading the solutions on [haskell.org](http://www.haskell.org/haskellwiki/Euler_problems/1_to_10#Problem_3)
 it seemed that defining `primes` mutually recursive with the factorization function was much more beneficial.
