@@ -11,7 +11,7 @@ find the sum of the even-valued terms.
 
 ---
 
-> module problem2 where
+> module Problem2 where
 
 > main :: IO ()
 > main = print . sum . filter even . takeWhile (< 4000000) $ fibs

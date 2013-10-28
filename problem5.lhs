@@ -7,14 +7,14 @@ What is the smallest positive number that is evenly divisible by all of the numb
 
 ---
 
+> module Problem5 where
+
 > import Data.List (find)
 > import Data.Maybe (fromJust)
+> import Problem1 (divBy)
 
 > main :: IO ()
 > main = print . fromJust . find (\n -> n `divByAll` [2..20]) $ [1..] 
 
 > divByAll :: Integral a => a -> [a] -> Bool
 > divByAll n ds = all (\d -> n `divBy` d) ds
-
-> divBy :: Integral a => a -> a -> Bool
-> divBy n d = rem n d == 0

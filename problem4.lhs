@@ -8,6 +8,8 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 ---
 
+> module Problem4 where
+
 > main :: IO ()
 > main = print . maximum . palindromes $ threeDigitSums
 >   where

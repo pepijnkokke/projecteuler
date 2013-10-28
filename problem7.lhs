@@ -7,14 +7,9 @@ What is the 10 001st prime number?
 
 ---
 
+> module Problem7 where
+
+> import Problem3 (primes)
+
 > main :: IO ()
-> main = print $ primes !! 10001
-
-> primes :: Integral a => [a]
-> primes = sieve [2..]
->   where
->     sieve :: Integral a => [a] -> [a]
->     sieve (x:xs) = x : sieve (filter (\y -> not (y `divBy` x)) xs)
-
-> divBy :: Integral a => a -> a -> Bool
-> divBy n d = rem n d == 0
+> main = print $ primes !! 10000

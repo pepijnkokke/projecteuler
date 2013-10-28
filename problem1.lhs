@@ -8,7 +8,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 ---
 
-> module problem1 where
+> module Problem1 where
 
 > main :: IO ()
 > main = print . sum . filter divBy3or5 $ [1 .. 999]

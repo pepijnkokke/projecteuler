@@ -12,6 +12,8 @@ Find the difference between the sum of the squares of the first one hundred natu
 
 ---
 
+> module Problem6 where
+
 > main :: IO ()
 > main = print . abs $ sumSquare [1..100] - squareSum [1..100]
 
