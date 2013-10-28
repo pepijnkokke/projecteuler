@@ -6,11 +6,10 @@ the product of two 2-digit numbers is 9009 = 91 × 99.
 
 Find the largest palindrome made from the product of two 3-digit numbers.
 
-> isPalindrome :: Integral a => [a] -> [a] -> Bool
-> isPalindrome [ ] [ ]   = True
-> isPalindrome  _  [ ]   = False
-> isPalindrome [ ]  _    = False
-> isPalindrome (x:xs) ys = 
+---
+
+> isPalindrome :: (Eq a, Integral a) => [a] -> Bool
+> isPalindrome xs = xs == reverse xs
 
 > digits :: Integral a => a -> a -> [a]
 > digits _ 0 = [0]
