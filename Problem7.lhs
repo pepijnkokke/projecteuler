@@ -10,7 +10,7 @@ What is the 10 001st prime number?
 > module Problem7 where
 > import Problem3 (primes)
 
+Why `(!! 10000)`? Because we start counting from `0`.
+
 > main :: IO ()
 > main = print $ primes !! 10000
-
-Why `(!! 10000)`? Because we start counting from `0`.
