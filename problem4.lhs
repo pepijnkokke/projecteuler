@@ -8,12 +8,23 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 ---
 
+> main :: IO ()
+> main = print . maximum . palindromes $ threeDigitSums
+>   where
+>     palindromes :: Integral a => [a] -> [a]
+>     palindromes = filter (isPalindrome . toDigits 10)
+>     threeDigitSums :: Integral a => [a]
+>     threeDigitSums = [ x * y | x <- [100..999], y <- [100..999] ]
+
 > isPalindrome :: (Eq a, Integral a) => [a] -> Bool
 > isPalindrome xs = xs == reverse xs
 
-> digits :: Integral a => a -> a -> [a]
-> digits _ 0 = [0]
-> digits b n = reverse (digits' n)
+> fromDigits :: Integral a => a -> [a] -> a
+> fromDigits b ds = foldl (\d r -> d * b + r) 0 ds
+
+> toDigits :: Integral a => a -> a -> [a]
+> toDigits _ 0 = [0]
+> toDigits b n = reverse (toDigits' n)
 >   where
->     digits' 0 = []
->     digits' n = rem n b : digits' (div n b)
+>     toDigits' 0 = []
+>     toDigits' n = rem n b : toDigits' (div n b)
