@@ -40,6 +40,3 @@ have to check divisability with all smaller primes no matter what.
 
 > primes :: Integral a => [a]
 > primes = 2 : filter ((== 1) . length . factor) [3,5..]
-
-> isPrime :: Integral a => a -> Bool
-> isPrime n = all (not . divBy n) [2 .. n - 1]
