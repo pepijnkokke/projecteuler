@@ -35,8 +35,9 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 >   where
 >     parse :: String -> Integer
 >     parse = read . concatMap lstrip . take 20 . drop 5 . lines
->     lstrip :: String -> String
->     lstrip = dropWhile (== ' ')
+>
+> lstrip :: String -> String
+> lstrip = dropWhile (== ' ')
 
 > ngrams :: Int -> [a] -> [[a]]
 > ngrams 0 xs = repeat []
