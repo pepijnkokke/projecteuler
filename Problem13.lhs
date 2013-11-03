@@ -108,7 +108,7 @@ Work out the first ten digits of the sum of the following one-hundred 50-digit n
 
 > main :: IO ()
 > main = do xs <- fmap parse (readFile "Problem13.lhs")
->           print (fromDigits 10 . take 10 . toDigits 10 . sum $ xs)
+>           print . take 10 . show . sum $ xs
 >   where
 >     parse :: String -> [Integer]
 >     parse = map (read. dropWhile (==' ')) . take 100 . drop 2 . lines
