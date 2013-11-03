@@ -23,21 +23,19 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
     84580156166097919133875499200524063689912560717606
     05886116467109405077541002256983155200055935729725
     71636269561882670428252483600823257530420752963450
-    
+
 ---
 
 > module Problem8 where
 > import Problem4 (toDigits)
 
 > main :: IO ()
-> main = do n <- return . parse =<< readFile "Problem8.lhs"
+> main = do n <- fmap parse (readFile "Problem8.lhs")
 >           print . maximum . map product . ngrams 5 . toDigits 10 $ n
 >   where
 >     parse :: String -> Integer
->     parse = read . concatMap lstrip . take 20 . drop 5 . lines
->
-> lstrip :: String -> String
-> lstrip = dropWhile (== ' ')
+>     parse = read . concatMap (dropWhile (==' ')) . take 20 . drop 5 . lines
+
 
 > ngrams :: Int -> [a] -> [[a]]
 > ngrams 0 xs = repeat []
