@@ -36,11 +36,32 @@ What is the greatest product of four adjacent numbers in the same direction
 > import Data.List (transpose)
 
 > main :: IO ()
-> main = do n <- return . parse =<< readFile "Problem11.lhs"
->           print n
+> main = do m <- fmap parse (readFile "Problem11.lhs")
+>           let hs = mp4 $ m
+>           let vs = mp4 . trans $ m
+>           let dr = mp4 . diags $ m
+>           let dl = mp4 . diags . map reverse $ m
+>           print . maximum $ [hs,vs,dr,dl]
 >   where
+>     -- parse a table in ascii format
 >     parse :: String -> [[Integer]]
 >     parse = map (map read . split (== ' ') . lstrip) . take 20 . drop 5 . lines
+>
+>     -- compute the maximum product of four adjacent numbers
+>     mp4 :: [[Integer]] -> Integer
+>     mp4 = maximum . concatMap (map product . ngrams 4)
+
+> -- | transpose a matrix
+> trans :: [[a]] -> [[a]]
+> trans [] = [[]]
+> trans (r:rs) = zipWith (:) r (trans rs)
+
+> -- | compute the diagonals of a matrix
+> diags :: [[a]] -> [[a]]
+> diags [] = []
+> diags (r:rs) = ds1 ++ (zipWith (:) r (ds2 ++ repeat []))
+>   where
+>     (ds1,ds2) = splitAt (length rs) (diags rs)
 
 > split :: (a -> Bool) -> [a] -> [[a]]
 > split _ [] = [[]]
