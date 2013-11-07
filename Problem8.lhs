@@ -37,6 +37,8 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 >     parse = read . concatMap (dropWhile (==' ')) . take 20 . drop 5 . lines
 
 
+> -- |Compute all k-mers in a string.
 > ngrams :: Int -> [a] -> [[a]]
-> ngrams 0 xs = repeat []
-> ngrams n xs = zipWith (:) xs (ngrams (n - 1) (tail xs))
+> ngrams k xs
+>   | length xs >= k = take k xs : ngrams k (tail xs)
+>   | otherwise     = []
