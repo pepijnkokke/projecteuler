@@ -9,7 +9,7 @@ That is, 3 + 7 + 4 + 9 = 23.
 
 Find the maximum total from top to bottom of the triangle below:
 
-  <p align="center"><img alt="Example triangle 1." src="Problem18_0.png" /></p>
+  <p align="center"><img alt="Example triangle 2." src="Problem18_1.png" /></p>
 
 ---
 
