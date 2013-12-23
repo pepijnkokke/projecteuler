@@ -14,7 +14,7 @@ How many such routes are there through a 20×20 grid?
 Since all routes only moving right and down have (in a 2×2 grid) length 4, so the
 question boils down to "What is the length of a route in an m×n grid?" (m+n) and
 "How many possible routes of length m×n are there only moving right or down in an?
-m×n grid?" ($\frac{(m + n)!}{m! * n!}$)
+m×n grid?" $\frac{(m+n)!}{m!×n!}$
 
 > main :: IO ()
 > main = print (routes 20 20)
