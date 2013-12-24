@@ -3,12 +3,10 @@ Maximum path sum I
 
 By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 
-<p align="center">
        3
       7 4
      2 4 6
     8 5 9 3
-</p>
 
 That is, 3 + 7 + 4 + 9 = 23.
 
@@ -33,3 +31,55 @@ Find the maximum total from top to bottom of the triangle below:
 ---
 
 > module Problem18 where
+> import Data.List (zipWith3,maximum)
+
+We can reify the lists of numbers into a tree structure using the
+following algorithm---the key feature of which is in the embedded
+`go` function, that moves the list of subtrees one place and then
+joins it with the orignal into a list od nodes.
+
+> data Tree a = Leaf
+>             | Node a (Tree a) (Tree a)
+>               deriving (Eq,Show)
+
+> toTree :: [[a]] -> Tree a
+> toTree = head . foldr go (repeat Leaf)
+>   where
+>     go :: [a] -> [Tree a] -> [Tree a]
+>     go xs ts = zipWith3 Node xs ts (tail ts)
+
+Once we have the trees, we can simply collect all possible paths
+and sum over them to find the maximal path sum.
+
+> paths :: Tree a -> [[a]]
+> paths Leaf = [[]]
+> paths (Node x l r) = fmap (x:) (paths l ++ paths r)
+
+    maxPathSum :: Integral a => [[a]] -> a
+    maxPathSum = maximum . map sum . paths . toTree
+
+Which computes the correct answer---but at what cost? As the problem
+statement already hints at, this brute-force solution is a bit slow,
+even on the simple triangles above.
+
+To make it faster we can perform a simple optimalisation: we can remove
+the intermediate data structure. The easiest way to do this is to just
+replace our constructor by a function that already computes our desired
+result.
+
+> maxPathSum :: Integral a => [[a]] -> a
+> maxPathSum = head . foldr1 go
+>   where
+>     go :: Integral a => [a] -> [a] -> [a]
+>     go xs ts = zipWith3 node xs ts (tail ts)
+>       where
+>         node :: Integral a => a -> a -> a -> a
+>         node x l r = x + max l r
+
+Using this function we can easily solve problem 18 *and* problem 67.
+
+> main :: IO ()
+> main = print . maxPathSum . parse =<< readFile "Problem18.lhs"
+>   where
+>     parse :: String -> [[Integer]]
+>     parse = map ((map read) . words) . take 15 . drop 14 . lines
