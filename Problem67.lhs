@@ -16,8 +16,7 @@ Find the maximum total from top to bottom in the attached file
 
 ---
 
-module Problem67 where
-
+> module Problem67 where
 > import Problem18 (maxPathSum)
 
 > main :: IO ()
