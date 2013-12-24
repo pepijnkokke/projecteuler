@@ -49,14 +49,12 @@ How many Sundays fell on the first of the month during the twentieth century
 > data Weekday = Mon | Tue | Wed | Thu | Fri | Sat | Sun
 >      deriving (Eq,Enum,Bounded,Show)
 
-> addWeekdays :: Weekday -> [Date] -> [(Weekday,Date)]
-> addWeekdays d = zip ([d..] ++ cycle [minBound..])
+> addWeekdays :: [Date] -> [(Weekday,Date)]
+> addWeekdays = zip (cycle [minBound..])
 
 > main :: IO ()
-> main = print (length enum4)
+> main = print (length firstMons)
 >   where
->     enum0 = datesFromTo (Date 1900 1 1) (Date 2000 12 31)
->     enum1 = addWeekdays Mon enum0
->     enum2 = dropWhile ((/= Date 1901 1 1) . snd) enum1 -- drop 1900 to 1901
->     enum3 = filter (\(_,Date _ _ d) -> d == 1) enum2    -- drop not first of month
->     enum4 = filter ((== Mon) . fst) enum3              -- drop not monday
+>     since1900 = addWeekdays (datesFromTo (Date 1900 1 1) (Date 2000 12 31))
+>     since1901 = dropWhile ((/= Date 1901 1 1) . snd) since1900
+>     firstMons = filter (\(wd,Date _ _ md) -> wd == Mon && md == 1) since1901
