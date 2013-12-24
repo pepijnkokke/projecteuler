@@ -31,12 +31,15 @@ as can be seen below.
         sieve :: Integral a => [a] -> [a]
         sieve (x:xs) = x : sieve (filter (\y -> not (y `divBy` x)) xs)
 
-Upon reading the solutions on [haskell.org](http://www.haskell.org/haskellwiki/Euler_problems/1_to_10#Problem_3)
-it seemed that defining `primes` mutually recursive with the factorization function was much more beneficial.
+Upon reading the solutions on [haskell.org](http://www.haskell.org/haskellwiki/Euler_problems/1_to_10#Problem_3) it seemed that defining `primes` mutually recursive with the factorization function was much more beneficial.
 
-The reason for this is that in the below implementation, a number can be discarded as soon as two of its prime
-factors are found---i.e. it's divisable by two of the smaller primes---whereas in the implementation above we
-have to check divisability with all smaller primes no matter what.
+The reason for this is---amongst others---that in the below implementation,
+a number can be discarded as soon as two of its prime factors are found---i.e.
+it's divisable by two of the smaller primes---whereas in the implementation
+above we have to check divisability with all smaller primes no matter what.
 
 > primes :: Integral a => [a]
-> primes = 2 : filter ((== 1) . length . factor) [3,5..]
+> primes = 2 : filter (single . factor) [3,5..]
+>   where
+>     single [_] = True
+>     single _ = False
