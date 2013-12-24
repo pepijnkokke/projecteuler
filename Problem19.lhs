@@ -57,6 +57,6 @@ How many Sundays fell on the first of the month during the twentieth century
 >   where
 >     enum0 = datesFromTo (Date 1900 1 1) (Date 2000 12 31)
 >     enum1 = addWeekdays Mon enum0
->     enum2 = dropWhile ((/= Date 1901 1 1) . snd) enum1
->     enum3 = filter (\(_,Date _ _ d) -> d == 1) enum2
->     enum4 = filter ((== Mon) . fst) enum3
+>     enum2 = dropWhile ((/= Date 1901 1 1) . snd) enum1 -- drop 1900 to 1901
+>     enum3 = filter (\(_,Date _ _ d) -> d == 1) enum2    -- drop not first of month
+>     enum4 = filter ((== Mon) . fst) enum3              -- drop not monday
