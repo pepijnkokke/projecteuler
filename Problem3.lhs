@@ -42,4 +42,4 @@ above we have to check divisability with all smaller primes no matter what.
 > primes = 2 : filter (single . factor) [3,5..]
 >   where
 >     single [_] = True
->     single _ = False
+>     single  _  = False
